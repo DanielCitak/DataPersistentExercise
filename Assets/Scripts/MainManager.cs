@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+    public static MainManager Instance;
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -18,8 +19,8 @@ public class MainManager : MonoBehaviour
     
     private bool m_Started = false;
     private int m_Points;
-    private string bestScoreName;
-    private int bestScorePoint;
+    public string bestScoreName;
+    public int bestScorePoint;
     private bool m_GameOver = false;
 
     
@@ -100,9 +101,9 @@ public class MainManager : MonoBehaviour
     public void LoadScore()
     {
         string path = Application.persistentDataPath + "/savefile.json";
-        string json = File.ReadAllText(path);
         if (File.Exists(path))
         {
+            string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             bestScoreName = data.name;
             bestScorePoint = data.score;
