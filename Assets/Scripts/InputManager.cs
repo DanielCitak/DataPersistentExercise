@@ -7,13 +7,20 @@ using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
-    public static string nameInput;
-    public TextMeshPro inputText;
-       
+    public static InputManager Instance;   
+    public string nameInput;
+    public TextMeshProUGUI inputText;
     
     void Awake()
     {
-        
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+          
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
